@@ -23,13 +23,14 @@ public class ConfigUtil {
     public static String backupDir;
     public static String updateTmpDir;
     public static String programEntry;
+    
+    public static String md5Dest;
 
-    @PostConstruct
     public static void initConfig() {
         try {
             PropertiesConfiguration config = new PropertiesConfiguration();
             config.setEncoding("UTF-8");
-            config.setFileName("update.properties");
+            config.setFileName("conf/update.properties");
             config.load();
 
             LOGGER.info("读取配置文件...");

@@ -1,7 +1,11 @@
 package org.renix.updater.bean;
 
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 public class Update {
     private String appName;
@@ -11,6 +15,7 @@ public class Update {
     private Set<String> fileSets;
     private Set<String> dirSets;
     private Version version;
+    private Map<String,Version> versionMap = new HashMap<String, Version>();
     /**
      * @return the appName
      */
@@ -95,4 +100,17 @@ public class Update {
     public void setVersion(Version version) {
         this.version = version;
     }
+    /**
+     * @return the versionMap
+     */
+    public Map<String, Version> getVersionMap() {
+        return versionMap;
+    }
+    /**
+     * @param versionMap the versionMap to set
+     */
+    public void setVersionMap(Map<String, Version> versionMap) {
+        this.versionMap = versionMap;
+    }
+    
 }

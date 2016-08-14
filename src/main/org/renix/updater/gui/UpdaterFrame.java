@@ -97,7 +97,7 @@ public class UpdaterFrame extends WebFrame {
     private UpdaterFrame() {
         super();
         // 是否设置为无边框模式？
-        this.setUndecorated(true);
+//        this.setUndecorated(true);
         initComponents();
         InfoPane = new JEditorPane();
         InfoPane.setEditable(false);
@@ -312,6 +312,8 @@ public class UpdaterFrame extends WebFrame {
 
     private void SkipBActionPerformed(ActionEvent evt) {// GEN-FIRST:event_SkipBActionPerformed
         // callback.actionIgnore();
+        //更新本地的xml文档
+        UpdaterMain.watcher.WriteLocalVersion(UpdaterMain.localVersion,UpdaterMain.up.getVersion().getRelease());
         UpdaterMain.watcher.closeMeAndStarttarget(2);
     }// GEN-LAST:event_SkipBActionPerformed
 
@@ -342,7 +344,7 @@ public class UpdaterFrame extends WebFrame {
 
     private void DetailsBActionPerformed(ActionEvent evt) {// GEN-FIRST:event_DetailsBActionPerformed
         DetailedP.setVisible(!DetailedP.isVisible());
-        pack();
+//        pack();
     }// GEN-LAST:event_DetailsBActionPerformed
      // Variables declaration - do not modify//GEN-BEGIN:variables
 
@@ -383,8 +385,12 @@ public class UpdaterFrame extends WebFrame {
                 gui.pack();
                 gui.setLocationRelativeTo(null);
                 gui.setVisible(true);
-                gui.setResizable(true);
+//                gui.setResizable(true);
                 gui.setSize(400, 200);
+                //如果无法获取本地版本信息，弹出窗口由用户选择
+                if(UpdaterMain.localVersion==null){
+                    new VersionDialog(UpdaterFrame.getInstance()).setVisible(true);
+                }
 
             }
         });

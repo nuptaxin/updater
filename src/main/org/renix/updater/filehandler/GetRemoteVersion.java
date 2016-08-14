@@ -24,9 +24,9 @@ import org.renix.updater.util.ConfigUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class GetRemoteXML {
+public class GetRemoteVersion {
 
-    private static Logger LOGGER = LoggerFactory.getLogger(GetRemoteXML.class);
+    private static Logger LOGGER = LoggerFactory.getLogger(GetRemoteVersion.class);
 
     @SuppressWarnings("unchecked")
     private static void parseUpdateXML(Element node, Update up) {
@@ -48,17 +48,10 @@ public class GetRemoteXML {
             return;
         }
         if ("version".equals(node.getName())) {
-            Version v = up.getVersion();
+            Version v = new Version();
+            Version v1 = up.getVersion();
             Integer release = Integer.valueOf(node.attributeValue("release"));
-            if (v == null) {
-                v = new Version();
-                v.setRelease(release);
-            } else if (v.getRelease() < release) {
-                v = new Version();
-                v.setRelease(release);
-            } else {
-                return;
-            }
+            v.setRelease(release);
             v.setTag(node.attributeValue("tag"));
             v.setDesp(node.elementText("description"));
             String dtStr = node.elementText("datetime");
@@ -68,7 +61,13 @@ public class GetRemoteXML {
                                 node.elementText("datetime"));
                 v.setUpdateTime(dt.toDate());
             }
-            up.setVersion(v);
+            if(v1==null){
+                up.setVersion(v);
+            }else if (v1.getRelease() < release){
+                up.setVersion(v);
+            }
+            up.getVersionMap().put(v.getTag(), v);
+            
             return;
 
         }

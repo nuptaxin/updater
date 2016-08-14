@@ -18,18 +18,18 @@ class AboutDialog extends WebDialog {
      */
     private static final long serialVersionUID = 8107917872560814237L;
     
-    private WebButton CloseB;
-    private WebLabel VersionL;
-    private WebLabel jLabel1;
-    private WebLabel jLabel2;
-    private WebLabel jLabel4;
-    private WebLabel jLabel5;
-    private WebLabel jLabel6;
-    private WebPanel jPanel1;
-    private WebPanel jPanel2;
-    private WebPanel jPanel3;
-    private WebPanel jPanel4;
-    private WebPanel jPanel5;
+    private WebButton closeBtn;
+    private WebLabel updaterTag;
+    private WebLabel aboutLabel;
+    private WebLabel versionLabel;
+    private WebLabel contentLabel1;
+    private WebLabel contentLabel2;
+    private WebLabel contentLabel3;
+    private WebPanel pageEndPanel;
+    private WebPanel parentPanel;
+    private WebPanel centerPanel;
+    private WebPanel centerSouthPanel;
+    private WebPanel centerNorthPanel;
 
     public AboutDialog(UpdaterFrame updaterFrame) {
         super(updaterFrame, true);
@@ -42,75 +42,75 @@ class AboutDialog extends WebDialog {
      */
     private void initComponents() {
 
-        jPanel2 = new WebPanel();
-        jLabel1 = new WebLabel();
-        jPanel1 = new WebPanel();
-        CloseB = new WebButton();
-        jPanel3 = new WebPanel();
-        jPanel4 = new WebPanel();
-        jLabel2 = new WebLabel();
-        VersionL = new WebLabel();
-        jPanel5 = new WebPanel();
-        jLabel4 = new WebLabel();
-        jLabel5 = new WebLabel();
-        jLabel6 = new WebLabel();
+        parentPanel = new WebPanel();
+        aboutLabel = new WebLabel();
+        pageEndPanel = new WebPanel();
+        closeBtn = new WebButton();
+        centerPanel = new WebPanel();
+        centerSouthPanel = new WebPanel();
+        versionLabel = new WebLabel();
+        updaterTag = new WebLabel();
+        centerNorthPanel = new WebPanel();
+        contentLabel1 = new WebLabel();
+        contentLabel2 = new WebLabel();
+        contentLabel3 = new WebLabel();
 
         setAlwaysOnTop(true);//是否置于顶层
         setUndecorated(true);//是否隐藏窗口边框
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createCompoundBorder(
+        parentPanel.setBorder(javax.swing.BorderFactory.createCompoundBorder(
                 javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED),
                 javax.swing.BorderFactory.createEmptyBorder(12, 12, 12, 12)));
-        jPanel2.setLayout(new java.awt.BorderLayout());
+        parentPanel.setLayout(new java.awt.BorderLayout());
 
-        jLabel1.setFont(jLabel1.getFont().deriveFont(
-                jLabel1.getFont().getStyle() | java.awt.Font.BOLD, jLabel1.getFont().getSize() + 2));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("关于更新器");
-        jPanel2.add(jLabel1, java.awt.BorderLayout.PAGE_START);
+        aboutLabel.setFont(aboutLabel.getFont().deriveFont(
+                aboutLabel.getFont().getStyle() | java.awt.Font.BOLD, aboutLabel.getFont().getSize() + 2));
+        aboutLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        aboutLabel.setText("关于更新器");
+        parentPanel.add(aboutLabel, java.awt.BorderLayout.PAGE_START);
 
-        jPanel1.setLayout(new java.awt.BorderLayout());
+        pageEndPanel.setLayout(new java.awt.BorderLayout());
 
-        CloseB.setText("谢谢使用");
-        CloseB.addActionListener(new java.awt.event.ActionListener() {
+        closeBtn.setText("谢谢使用");
+        closeBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CloseBActionPerformed(evt);
             }
         });
-        jPanel1.add(CloseB, java.awt.BorderLayout.EAST);
+        pageEndPanel.add(closeBtn, java.awt.BorderLayout.EAST);
 
-        jPanel2.add(jPanel1, java.awt.BorderLayout.PAGE_END);
+        parentPanel.add(pageEndPanel, java.awt.BorderLayout.PAGE_END);
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(8, 0, 8, 0));
-        jPanel3.setLayout(new java.awt.BorderLayout(0, 8));
+        centerPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(8, 0, 8, 0));
+        centerPanel.setLayout(new java.awt.BorderLayout(0, 8));
 
-        jPanel4.setLayout(new java.awt.BorderLayout());
+        centerSouthPanel.setLayout(new java.awt.BorderLayout());
 
-        jLabel2.setText("版本:");
-        jPanel4.add(jLabel2, java.awt.BorderLayout.WEST);
+        versionLabel.setText("版本:");
+        centerSouthPanel.add(versionLabel, java.awt.BorderLayout.WEST);
 
-        VersionL.setText("V1.0.0.1");
-        VersionL.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 8, 0, 0));
-        jPanel4.add(VersionL, java.awt.BorderLayout.CENTER);
+        updaterTag.setText("V1.0.0.1");
+        updaterTag.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 8, 0, 0));
+        centerSouthPanel.add(updaterTag, java.awt.BorderLayout.CENTER);
 
-        jPanel3.add(jPanel4, java.awt.BorderLayout.SOUTH);
+        centerPanel.add(centerSouthPanel, java.awt.BorderLayout.SOUTH);
 
-        jPanel5.setLayout(new javax.swing.BoxLayout(jPanel5, javax.swing.BoxLayout.Y_AXIS));
+        centerNorthPanel.setLayout(new javax.swing.BoxLayout(centerNorthPanel, javax.swing.BoxLayout.Y_AXIS));
 
-        jLabel4.setText(("Jupidator is a library for automatic updating of applications."));
-        jPanel5.add(jLabel4);
+        contentLabel1.setText(("Jupidator is a library for automatic updating of applications."));
+        centerNorthPanel.add(contentLabel1);
 
-        jLabel5.setText(("It is open source under the LGPL license."));
-        jPanel5.add(jLabel5);
+        contentLabel2.setText(("It is open source under the LGPL license."));
+        centerNorthPanel.add(contentLabel2);
 
-        jLabel6.setText(("More info can be found in: http://jupidator.sourceforge.net"));
-        jPanel5.add(jLabel6);
+        contentLabel3.setText(("More info can be found in: http://jupidator.sourceforge.net"));
+        centerNorthPanel.add(contentLabel3);
 
-        jPanel3.add(jPanel5, java.awt.BorderLayout.NORTH);
+        centerPanel.add(centerNorthPanel, java.awt.BorderLayout.NORTH);
 
-        jPanel2.add(jPanel3, java.awt.BorderLayout.CENTER);
+        parentPanel.add(centerPanel, java.awt.BorderLayout.CENTER);
 
-        getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
+        getContentPane().add(parentPanel, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

@@ -50,7 +50,7 @@ public class GetRemoteMD5Thread implements Runnable {
         try {
             url = new URL(xmlMD5Url);
         } catch (MalformedURLException e) {
-            LOGGER.error("无法获取版本详情信息文件", e);
+            LOGGER.error("无法获取版本详情信息文件"+xmlMD5Url, e);
             return;
         }
 
@@ -81,6 +81,7 @@ public class GetRemoteMD5Thread implements Runnable {
         UpdaterMain.watcher.updateStepProgress(0);
         String baseUrl = UpdaterMain.up.getUrl();
         String xmlMD5Url = baseUrl + "/" + UpdaterMain.up.getVersion().getTag() + "/md5.xml";
+        System.out.println("xmlMD5Url"+xmlMD5Url);
         Cache cache = Cache.getInstance();
         Map<String, Long> fileSizeMap = cache.getFileSizeMap();
         Map<String, String> fileMD5Map = cache.getFileMD5Map();

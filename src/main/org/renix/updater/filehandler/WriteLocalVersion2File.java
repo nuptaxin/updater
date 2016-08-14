@@ -1,4 +1,4 @@
-package org.renix.updater.util;
+package org.renix.updater.filehandler;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -14,76 +14,49 @@ import org.dom4j.io.OutputFormat;
 import org.dom4j.io.XMLWriter;
 import org.joda.time.DateTime;
 import org.renix.updater.bean.Version;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-/**
- * 获取本地程序版本号。 如果在当前用户目录下有记录，以当前用户记录为准。 如果当前用户目录下无记录，拿到当前{home}目录下的jar包进行记录。
- * 如果拿不到该记录，那么生成一次MD5值并与远程服务器进行对比。
- * 
- * @author renzx
- */
-public class VersionUtil {
-    public static Version getVersionByXML() {
-        return null;
+public class WriteLocalVersion2File {
 
-    }
+    private static Logger LOGGER = LoggerFactory.getLogger(WriteLocalVersion2File.class);
 
-    public Version getVersionByJar() {
-        return null;
 
-    }
-
-    public Version getVersionByUser() {
-        return null;
-
-    }
-
-    public Version getVersionByCompareFile() {
-        return null;
-
-    }
-
-    public static void ModifyVersionXML() {
+    public static void write(Version v, Integer release) {
         String userHome = FileUtils.getUserDirectoryPath();
-        String versionParent = userHome + File.pathSeparator + ".updater-java";
+        String versionParent = userHome + File.separator + ".updater-java";
         File versionFile = FileUtils.getFile(versionParent, "version.xml");
-        if (!versionFile.exists()) {
-            try {
-                createInitVersionFile(versionFile);
-                FileUtils.touch(versionFile);
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
-
-    }
-
-    private static void createInitVersionFile(File versionFile) {
-        Version v = new Version();
-        v.setTag("0.0.0.1");
-        v.setDesp("程序初始化版本");
-
         Writer fileWriter = null;
         try {
             fileWriter = new FileWriter(versionFile, false);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        write2File(fileWriter, v,release);
+    }
+
+
+    private static void write2File(Writer fileWriter, Version v, Integer release) {
         Document document = DocumentHelper.createDocument();
 
         // 创建root
         Element root = document.addElement("version");
         root.addAttribute("datetime", DateTime.now().toString("yyyy-MM-dd'T'HH:mm:ss"));
 
-        // 生成root的一个接点
         Element paramTag = root.addElement("tag");
         paramTag.addText(v.getTag());
         Element paramDesp = root.addElement("description");
         paramDesp.addText(v.getDesp());
-        Element paramDt = root.addElement("updateTime");
-        paramDt.addText(new DateTime(v.getUpdateTime()).toString("yyyy-MM-dd'T'HH:mm:ss"));
-        
-     // 创建字符串缓冲区
+        Element paramSkip = root.addElement("skip");
+        paramSkip.addText(release+"");
+
+        // 为节点添加属性
+        // param.addAttribute("key", "sys.username");
+        // 为节点添加文本, 也可以用addText()
+        // param.addCDATA("中国");
+        // param.addText("中国");
+
+        // 创建字符串缓冲区
         StringWriter stringWriter = new StringWriter();
         // 设置文件编码
         OutputFormat xmlFormat = new OutputFormat();
@@ -111,6 +84,9 @@ public class VersionUtil {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        // 输出xml
 
     }
+
+
 }

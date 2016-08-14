@@ -12,13 +12,15 @@ import java.util.concurrent.TimeUnit;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.renix.updater.UpdaterMain;
+import org.renix.updater.bean.Version;
 import org.renix.updater.filehandler.FileCompareThread;
 import org.renix.updater.filehandler.FileDeleteThread;
 import org.renix.updater.filehandler.FileDownloadThread;
 import org.renix.updater.filehandler.FileUpdateThread;
 import org.renix.updater.filehandler.GetLocalMD5Thread;
 import org.renix.updater.filehandler.GetRemoteMD5Thread;
-import org.renix.updater.filehandler.GetRemoteXML;
+import org.renix.updater.filehandler.GetRemoteVersion;
+import org.renix.updater.filehandler.WriteLocalVersion2File;
 import org.renix.updater.filehandler.old.FileCompare;
 import org.renix.updater.filehandler.old.FileDelete;
 import org.renix.updater.filehandler.old.FileDownload;
@@ -40,7 +42,7 @@ public class UpdaterWatcher {
 
     public void step1() {
         String baseUrl = UpdaterMain.up.getUrl();
-        GetRemoteXML.getMD5File(baseUrl+"/"+UpdaterMain.up.getVersion().getTag()+"/md5.xml", fileSizeMap, fileMD5Map, dirSet);
+        GetRemoteVersion.getMD5File(baseUrl+"/"+UpdaterMain.up.getVersion().getTag()+"/md5.xml", fileSizeMap, fileMD5Map, dirSet);
         currentStep=1;
         step2x();
     }
@@ -170,5 +172,18 @@ public class UpdaterWatcher {
         } finally{
             System.exit(0);
         }
+    }
+    public void WriteLocalVersion(Version version) {
+        WriteLocalVersion2File.write(version,UpdaterMain.skipVersion);
+        UpdaterMain.localVersion=version;
+        //需要判断下选择的版本是否为最新的版本
+        if(UpdaterMain.up.getVersion().getTag().equals(version.getTag())){
+            closeMeAndStarttarget(2);
+        }
+        
+    }
+    public void WriteLocalVersion(Version localVersion, Integer release) {
+        WriteLocalVersion2File.write(localVersion,release);
+        
     }
 }
