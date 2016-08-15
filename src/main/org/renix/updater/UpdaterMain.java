@@ -51,7 +51,7 @@ public class UpdaterMain {
                     }
                 }
                 String newver = "有新版本的 " + up.getAppName() + " 可以下载!";
-                String versinfo = "最新版本：" + up.getVersion().getTag() + " ，你当期的版本：" + versionTagStr;
+                String versinfo = "最新版本：" + up.getVersion().getTag() + "  当前版本：" + versionTagStr;
                 String title = "找到 " + up.getAppName() + " 新版本";
                 String infopane = HTMLCreator.getList(up.getVersion());
 

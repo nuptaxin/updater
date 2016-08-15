@@ -20,14 +20,28 @@
 
 package org.renix.updater.gui;
 
+import java.awt.Component;
 import java.awt.Dimension;
+
 import javax.swing.JScrollPane;
+
+import com.alee.laf.scroll.WebScrollPane;
 
 /**
  *
  * @author teras
  */
-public class Details extends JScrollPane {
+public class Details extends WebScrollPane {
+
+    public Details(Component view) {
+        super(view);
+        // TODO Auto-generated constructor stub
+    }
+
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1434601170936252157L;
 
     @Override
     public Dimension getPreferredSize() {

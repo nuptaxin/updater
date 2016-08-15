@@ -38,7 +38,7 @@ public class UpdaterFrame extends WebFrame {
      * serialVersionUID
      */
     private static final long serialVersionUID = -3349148414668844595L;
-    private static UpdaterFrame uFrame = null;
+    private static UpdaterFrame upFrame = null;
     /**
      * 下一步按钮
      */
@@ -47,6 +47,7 @@ public class UpdaterFrame extends WebFrame {
     private WebPanel ButtonPanel;
     private WebPanel CommandP;
     private WebPanel DetailedP;
+    private WebPanel stepDetailP;
     /**
      * 详情按钮
      */
@@ -97,24 +98,25 @@ public class UpdaterFrame extends WebFrame {
     private UpdaterFrame() {
         super();
         // 是否设置为无边框模式？
-//        this.setUndecorated(true);
+        // this.setUndecorated(true);
         initComponents();
         InfoPane = new JEditorPane();
         InfoPane.setEditable(false);
-        ChangeLogP = new Details();
+        ChangeLogP = new Details(null);
         ChangeLogP.setViewportView(InfoPane);
         DetailedP.add(ChangeLogP, BorderLayout.CENTER);
+        stepDetailP.setVisible(false);
         LaterB.requestFocus();
     }
 
     public static UpdaterFrame getInstance() {
         synchronized (UpdaterFrame.class) {
-            if (uFrame == null) {
-                uFrame = new UpdaterFrame();
+            if (upFrame == null) {
+                upFrame = new UpdaterFrame();
             }
         }
 
-        return uFrame;
+        return upFrame;
     }
 
     /**
@@ -139,6 +141,7 @@ public class UpdaterFrame extends WebFrame {
         MainPanel = new WebPanel();
         InfoHolderP = new WebPanel();
         DetailedP = new WebPanel();
+        stepDetailP = new WebPanel();
         RelNotesL = new WebLabel();
         WebPanel5 = new WebPanel();
         VersInfoL = new WebLabel();
@@ -181,7 +184,8 @@ public class UpdaterFrame extends WebFrame {
         ProgressP.add(ButtonPanel, BorderLayout.EAST);
 
         InfoL.setText(("正在获取新版本详情……"));
-        ProgressP.add(InfoL, BorderLayout.LINE_START);
+        stepDetailP.add(InfoL, BorderLayout.CENTER);
+//        ProgressP.add(InfoL, BorderLayout.LINE_START);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -196,10 +200,12 @@ public class UpdaterFrame extends WebFrame {
         RelNotesL.setFont(RelNotesL.getFont().deriveFont(
                 RelNotesL.getFont().getStyle() | java.awt.Font.BOLD));
         RelNotesL.setText(("更新说明"));
+        RelNotesL.setMargin(3);
         RelNotesL.setBorder(javax.swing.BorderFactory.createEmptyBorder(12, 0, 4, 0));
         DetailedP.add(RelNotesL, BorderLayout.NORTH);
 
         InfoHolderP.add(DetailedP, BorderLayout.CENTER);
+        InfoHolderP.add(stepDetailP, BorderLayout.SOUTH);
 
         WebPanel5.setLayout(new BorderLayout());
 
@@ -234,6 +240,7 @@ public class UpdaterFrame extends WebFrame {
         IconL.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         IconL.setBorder(javax.swing.BorderFactory.createEmptyBorder(12, 8, 0, 12));
         MainPanel.add(IconL, BorderLayout.WEST);
+        MainPanel.setMargin(10);
 
         CommandP.setLayout(new BorderLayout());
 
@@ -298,6 +305,10 @@ public class UpdaterFrame extends WebFrame {
      * @param evt
      */
     private void UpdateBActionPerformed(ActionEvent evt) {// GEN-FIRST:event_UpdateBActionPerformed
+        DetailedP.setVisible(false);
+        stepDetailP.setVisible(true);
+//        stepDetailP.setBackground(Color.red);
+        stepDetailP.setMargin(0, 0, 40, 0);
         CommandP.setVisible(false);
         ProgressP.setVisible(true);
         MainPanel.add(ProgressP, BorderLayout.SOUTH);
@@ -312,8 +323,9 @@ public class UpdaterFrame extends WebFrame {
 
     private void SkipBActionPerformed(ActionEvent evt) {// GEN-FIRST:event_SkipBActionPerformed
         // callback.actionIgnore();
-        //更新本地的xml文档
-        UpdaterMain.watcher.WriteLocalVersion(UpdaterMain.localVersion,UpdaterMain.up.getVersion().getRelease());
+        // 更新本地的xml文档
+        UpdaterMain.watcher.WriteLocalVersion(UpdaterMain.localVersion, UpdaterMain.up.getVersion()
+                .getRelease());
         UpdaterMain.watcher.closeMeAndStarttarget(2);
     }// GEN-LAST:event_SkipBActionPerformed
 
@@ -344,7 +356,7 @@ public class UpdaterFrame extends WebFrame {
 
     private void DetailsBActionPerformed(ActionEvent evt) {// GEN-FIRST:event_DetailsBActionPerformed
         DetailedP.setVisible(!DetailedP.isVisible());
-//        pack();
+        // pack();
     }// GEN-LAST:event_DetailsBActionPerformed
      // Variables declaration - do not modify//GEN-BEGIN:variables
 
@@ -385,10 +397,10 @@ public class UpdaterFrame extends WebFrame {
                 gui.pack();
                 gui.setLocationRelativeTo(null);
                 gui.setVisible(true);
-//                gui.setResizable(true);
-                gui.setSize(400, 200);
-                //如果无法获取本地版本信息，弹出窗口由用户选择
-                if(UpdaterMain.localVersion==null){
+                // gui.setResizable(true);
+                gui.setSize(400, 400 * 618 / 1000);
+                // 如果无法获取本地版本信息，弹出窗口由用户选择
+                if (UpdaterMain.localVersion == null) {
                     new VersionDialog(UpdaterFrame.getInstance()).setVisible(true);
                 }
 
@@ -398,14 +410,14 @@ public class UpdaterFrame extends WebFrame {
     }
 
     public void updateStepProgress(int step) {
-        uFrame = getInstance();
-        uFrame.wsp.setSelectedStep(step);
+        upFrame = getInstance();
+        upFrame.wsp.setSelectedStep(step);
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 System.out.println(UpdaterMain.watcher.currentStep + "-"
                         + UpdaterMain.watcher.percent);
-                uFrame.wsp.revalidate();
-                uFrame.wsp.repaint();
+                upFrame.wsp.revalidate();
+                upFrame.wsp.repaint();
                 // 是否自动触发？
                 // if(UpdaterMain.watcher.currentStep==1&&UpdaterMain.watcher.percent==1f){
                 // UpdaterMain.watcher.step2x();
@@ -436,11 +448,11 @@ public class UpdaterFrame extends WebFrame {
      * @param percent百分比
      */
     public void updateProgressBar(String ratio, float percent) {
-        uFrame = getInstance();
-        uFrame.PBar.setValue(Math.round(percent * 100));
-        uFrame.PBar.setToolTipText("当前下载速度: " + ratio);
+        upFrame = getInstance();
+        upFrame.PBar.setValue(Math.round(percent * 100));
+        upFrame.PBar.setToolTipText("当前下载速度: " + ratio);
         // uFrame.PBar.setString(ratio);
-        uFrame.PBar.setString(Math.round(percent * 100) + "%");
+        upFrame.PBar.setString(Math.round(percent * 100) + "%");
         System.out.println(percent);
         if (UpdaterMain.watcher.currentStep == 5 && UpdaterMain.watcher.percent == 1f) {
             nextBtn.setText("完成");

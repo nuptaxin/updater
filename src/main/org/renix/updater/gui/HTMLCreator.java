@@ -1,30 +1,11 @@
-/*
- *
- * This file is part of Jupidator.
- *
- * Jupidator is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, version 2.
- *
- *
- * Jupidator is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Jupidator; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
- *
- */
-
 package org.renix.updater.gui;
 
 import org.renix.updater.bean.Version;
 
 /**
- *
- * @author teras
+ * 更新说明板块格式化工具
+ * 
+ * @author renzx
  */
 public class HTMLCreator {
 
@@ -35,16 +16,18 @@ public class HTMLCreator {
         data.append("  <head>\n");
         data.append("    <title></title>\n");
         data.append("    <style type=\"text/css\">\n");
-        data.append("      .jupreleaseinfo { margin: 0px 10px 16px 12px; }\n");
-        data.append("      .jupversion { padding:4px 4px 4px 4px; margin: 5px 10px 5px 10px; background: #d2e6d2; font-weight: bold; }\n");
-        data.append("      .jupinfo { margin: 0px 10px 16px 12px; }\n");
+        data.append("      .jupentry { margin: 0px 4px 2px 4px; }\n");
+        data.append("      .version { padding:4px 4px 4px 4px; margin: 5px 10px 5px 10px; background: #d2e6d2; font-weight: bold; }\n");
+        data.append("      .info { margin: 0px 10px 16px 12px; }\n");
         data.append("    </style>\n");
         data.append("  </head>\n");
         data.append("  <body>\n");
 
         data.append("    <div class=\"jupentry\">\n");
-        data.append("      <p class=\"jupversion\">").append("Version").append(": ").append(v.getRelease()).append("</p>\n");
-        data.append("      <p class=\"jupinfo\">").append(v.getDesp()).append("</p>\n");
+        data.append("      <p class=\"version\">").append("版本Tag").append(": ")
+                .append(v.getRelease()).append("</p>\n");
+        data.append("      <p class=\"info\">").append("更新日志").append(": ").append(v.getDesp())
+                .append("</p>\n");
         data.append("    </div>\n");
         data.append("  </body>\n</html>\n");
         return data.toString();
