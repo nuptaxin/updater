@@ -25,6 +25,13 @@ public class WriteLocalVersion2File {
     public static void write(Version v, Integer release) {
         String userHome = FileUtils.getUserDirectoryPath();
         String versionParent = userHome + File.separator + ".updater-java";
+        File parentFile = new File(versionParent);
+        try {
+            FileUtils.forceMkdir(parentFile);
+        } catch (IOException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
         File versionFile = FileUtils.getFile(versionParent, "version.xml");
         Writer fileWriter = null;
         try {

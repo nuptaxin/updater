@@ -402,6 +402,8 @@ public class UpdaterFrame extends WebFrame {
                 // 如果无法获取本地版本信息，弹出窗口由用户选择
                 if (UpdaterMain.localVersion == null) {
                     new VersionDialog(UpdaterFrame.getInstance()).setVisible(true);
+                    String versinfo1 = "最新版本：" + UpdaterMain.up.getVersion().getTag() + "  当前版本：" + UpdaterMain.localVersion.getTag();
+                    gui.VersInfoL.setText(versinfo1);
                 }
 
             }
