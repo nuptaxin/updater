@@ -97,13 +97,13 @@ class AboutDialog extends WebDialog {
 
         centerNorthPanel.setLayout(new javax.swing.BoxLayout(centerNorthPanel, javax.swing.BoxLayout.Y_AXIS));
 
-        contentLabel1.setText(("Jupidator is a library for automatic updating of applications."));
+        contentLabel1.setText(("Java更新器是基于JDK6+可自动更新应用程序的升级软件"));
         centerNorthPanel.add(contentLabel1);
 
-        contentLabel2.setText(("It is open source under the LGPL license."));
+        contentLabel2.setText((""));
         centerNorthPanel.add(contentLabel2);
 
-        contentLabel3.setText(("More info can be found in: http://jupidator.sourceforge.net"));
+        contentLabel3.setText(("源码下载: https://estsvn.com:8443/svn/est-report/trunk/src/Updater"));
         centerNorthPanel.add(contentLabel3);
 
         centerPanel.add(centerNorthPanel, java.awt.BorderLayout.NORTH);
