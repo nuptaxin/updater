@@ -4,7 +4,7 @@
 
     <groupId>org.renix.updater</groupId>
     <artifactId>updater-java</artifactId>
-    <version>1.0.0.1</version>
+    <version>1.0.0.2</version>
     <packaging>jar</packaging>
 
     <name>updater-java</name>
@@ -257,16 +257,8 @@
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
+                    <appendAssemblyId>false</appendAssemblyId>
                 </configuration>
-                <executions>
-                    <execution>
-                        <id>make-assembly</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>

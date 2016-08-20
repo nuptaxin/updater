@@ -49,6 +49,10 @@ public class UpdaterMain {
                     if (up.getVersion().getRelease() == skipVersion) {
                         watcher.closeMeAndStarttarget(2);
                     }
+                    //是否是最新版本
+                    if (up.getVersion().getTag() .equals(versionTagStr) ) {
+                        watcher.closeMeAndStarttarget(2);
+                    }
                 }
                 String newver = "有新版本的 " + up.getAppName() + " 可以下载!";
                 String versinfo = "最新版本：" + up.getVersion().getTag() + "  当前版本：" + versionTagStr;

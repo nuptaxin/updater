@@ -18,6 +18,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.plaf.FontUIResource;
 
 import org.renix.updater.UpdaterMain;
+import org.renix.updater.filehandler.WriteLocalVersion2File;
 
 import com.alee.extended.progress.WebStepProgress;
 import com.alee.laf.WebLookAndFeel;
@@ -457,6 +458,7 @@ public class UpdaterFrame extends WebFrame {
         upFrame.PBar.setString(Math.round(percent * 100) + "%");
         System.out.println(percent);
         if (UpdaterMain.watcher.currentStep == 5 && UpdaterMain.watcher.percent == 1f) {
+            WriteLocalVersion2File.write(UpdaterMain.up.getVersion(), UpdaterMain.skipVersion);
             nextBtn.setText("完成");
         }
     }

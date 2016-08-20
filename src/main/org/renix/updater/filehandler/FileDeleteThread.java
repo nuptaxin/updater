@@ -51,5 +51,6 @@ public class FileDeleteThread implements Runnable {
         }
         
         UpdaterMain.watcher.updateProgressBar(0.5f);
+        UpdaterMain.watcher.updateStepProgress(4);
     }
 }
