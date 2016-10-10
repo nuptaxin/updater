@@ -10,19 +10,22 @@ import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
 import org.renix.updater.UpdaterMain;
-import org.renix.updater.gui.UpdaterWatcher;
 import org.renix.updater.util.Cache;
 import org.renix.updater.util.ConfigUtil;
 
+/**
+ * @ClassName: FileDownloadThread
+ * @Description: 文件下载线程
+ * @author renzx
+ * @date 2016年10月10日
+ */
 public class FileDownloadThread implements Runnable {
     /**
      * 需要新增的文件
-     * @param dirAddSet 
-     * @param updateTmpDir 
+     * 
+     * @param dirAddSet
+     * @param updateTmpDir
      */
-    
-
-
     private void DownloadDir(Set<String> dirAddSet, String updateTmpDir) throws IOException {
         String localPath = updateTmpDir;
         for (String string : dirAddSet) {
@@ -38,13 +41,13 @@ public class FileDownloadThread implements Runnable {
         Set<String> fileModSet = cache.getFileModSet();
 
         Set<String> dirAddSet = cache.getDirAddSet();
-        //删除之前的更新文件临时目录
+        // 删除之前的更新文件临时目录
         String updateTmpDir = ConfigUtil.updateTmpDir;
         File updateTmpDirFile = new File(updateTmpDir);
         FileUtils.deleteQuietly(updateTmpDirFile);
-        
+
         try {
-            DownloadDir(dirAddSet,updateTmpDir);
+            DownloadDir(dirAddSet, updateTmpDir);
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -81,7 +84,7 @@ public class FileDownloadThread implements Runnable {
             float percent = currentSize * 1.0f / sumSize;
             UpdaterMain.watcher.updateProgressBar(percent);
         }
-        
+
         UpdaterMain.watcher.updateProgressBar(1f);
 
     }

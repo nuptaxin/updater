@@ -8,6 +8,12 @@ import org.renix.updater.UpdaterMain;
 import org.renix.updater.util.Cache;
 import org.renix.updater.util.ConfigUtil;
 
+/**
+ * @ClassName: FileDeleteThread
+ * @Description: 文件删除线程
+ * @author renzx
+ * @date 2016年10月10日
+ */
 public class FileDeleteThread implements Runnable {
     @Override
     public void run() {
@@ -49,7 +55,7 @@ public class FileDeleteThread implements Runnable {
                 e.printStackTrace();
             }
         }
-        
+
         UpdaterMain.watcher.updateProgressBar(0.5f);
         UpdaterMain.watcher.updateStepProgress(4);
     }

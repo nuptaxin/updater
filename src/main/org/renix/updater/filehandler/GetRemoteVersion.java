@@ -24,6 +24,12 @@ import org.renix.updater.util.ConfigUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * @ClassName: GetRemoteVersion
+ * @Description: 获取远程版本信息线程
+ * @author renzx
+ * @date 2016年10月10日
+ */
 public class GetRemoteVersion {
 
     private static Logger LOGGER = LoggerFactory.getLogger(GetRemoteVersion.class);
@@ -61,13 +67,13 @@ public class GetRemoteVersion {
                                 node.elementText("datetime"));
                 v.setUpdateTime(dt.toDate());
             }
-            if(v1==null){
+            if (v1 == null) {
                 up.setVersion(v);
-            }else if (v1.getRelease() < release){
+            } else if (v1.getRelease() < release) {
                 up.setVersion(v);
             }
             up.getVersionMap().put(v.getTag(), v);
-            
+
             return;
 
         }
@@ -130,6 +136,8 @@ public class GetRemoteVersion {
 
         // 创建SAXReader对象
         SAXReader reader = new SAXReader();
+
+        reader.setEncoding("UTF-8");
         // 读取文件 转换成Document
         Document document;
         try {

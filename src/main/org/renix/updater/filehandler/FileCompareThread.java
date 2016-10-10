@@ -2,12 +2,18 @@ package org.renix.updater.filehandler;
 
 import java.util.Map;
 import java.util.Set;
-
 import org.renix.updater.UpdaterMain;
 import org.renix.updater.util.Cache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+
+/**
+ * @ClassName: FileCompareThread
+ * @Description: 文件比较线程
+ * @author renzx
+ * @date 2016年10月10日
+ */
 public class FileCompareThread implements Runnable {
     Logger LOGGER = LoggerFactory.getLogger(FileCompareThread.class);
 
@@ -56,7 +62,7 @@ public class FileCompareThread implements Runnable {
         for (String string : fileModSet) {
             LOGGER.info("需要更新的文件：" + string);
         }
-        
+
         UpdaterMain.watcher.updateProgressBar(1f);
     }
 }

@@ -4,18 +4,20 @@ import org.renix.updater.bean.Update;
 import org.renix.updater.bean.Version;
 import org.renix.updater.filehandler.CreateVersionMD5;
 import org.renix.updater.filehandler.GetLocalVersionThread;
-import org.renix.updater.filehandler.GetRemoteMD5Thread;
 import org.renix.updater.filehandler.GetRemoteVersion;
 import org.renix.updater.gui.HTMLCreator;
 import org.renix.updater.gui.UpdaterFrame;
 import org.renix.updater.gui.UpdaterWatcher;
 import org.renix.updater.util.CliUtil;
 import org.renix.updater.util.ConfigUtil;
-import org.renix.updater.util.VersionUtil;
+
+
 
 /**
- * Hello world!
- *
+ * @ClassName: UpdaterMain
+ * @Description: 主函数入口
+ * @author renzx
+ * @date 2016年10月10日
  */
 public class UpdaterMain {
     public static Version localVersion = null;
@@ -24,6 +26,7 @@ public class UpdaterMain {
     public static UpdaterWatcher watcher;
     public static String versionThread = "start";
 
+    @SuppressWarnings("static-access")
     public static void main(String[] args) {
         // ConfigUtil.initConfig();
         Long optType = CliUtil.parse(args);
@@ -49,8 +52,8 @@ public class UpdaterMain {
                     if (up.getVersion().getRelease() == skipVersion) {
                         watcher.closeMeAndStarttarget(2);
                     }
-                    //是否是最新版本
-                    if (up.getVersion().getTag() .equals(versionTagStr) ) {
+                    // 是否是最新版本
+                    if (up.getVersion().getTag().equals(versionTagStr)) {
                         watcher.closeMeAndStarttarget(2);
                     }
                 }

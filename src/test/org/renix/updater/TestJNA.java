@@ -1,4 +1,4 @@
-package org.renix.updater;
+/*package org.renix.updater;
 
 import com.sun.jna.platform.win32.Advapi32Util;
 import com.sun.jna.platform.win32.WinReg;
@@ -44,3 +44,4 @@ public class TestJNA {
         Advapi32Util.registrySetIntValue(WinReg.HKEY_CURRENT_USER, "Software\\Microsoft\\Command Processor", "EnableExtensions", 1);
     }
 }
+*/

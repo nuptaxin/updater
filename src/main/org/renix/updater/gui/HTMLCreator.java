@@ -3,9 +3,10 @@ package org.renix.updater.gui;
 import org.renix.updater.bean.Version;
 
 /**
- * 更新说明板块格式化工具
- * 
+ * @ClassName: HTMLCreator
+ * @Description: 更新说明板块格式化工具
  * @author renzx
+ * @date 2016年10月10日
  */
 public class HTMLCreator {
 

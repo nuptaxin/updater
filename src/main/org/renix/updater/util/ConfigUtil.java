@@ -3,17 +3,16 @@ package org.renix.updater.util;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
-import javax.annotation.PostConstruct;
-
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
 /**
- * 读取配置文件
- * 
+ * @ClassName: ConfigUtil
+ * @Description: 读取配置文件工具类
  * @author renzx
+ * @date 2016年10月10日
  */
 public class ConfigUtil {
     private static Logger LOGGER = LoggerFactory.getLogger(ConfigUtil.class);
@@ -23,7 +22,7 @@ public class ConfigUtil {
     public static String backupDir;
     public static String updateTmpDir;
     public static String programEntry;
-    
+
     public static String md5Dest;
 
     public static void initConfig() {

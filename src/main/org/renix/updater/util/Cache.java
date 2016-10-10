@@ -5,6 +5,12 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * @ClassName: Cache
+ * @Description: 缓存类
+ * @author renzx
+ * @date 2016年10月10日
+ */
 public class Cache {
     private Map<String, Long> fileSizeMap = new HashMap<String, Long>();
     private Map<String, String> fileMD5Map = new HashMap<String, String>();
@@ -27,9 +33,9 @@ public class Cache {
     private Cache() {
 
     }
-    
-    public static synchronized void init(){
-        
+
+    public static synchronized void init() {
+
     }
 
     public static synchronized Cache getInstance() {

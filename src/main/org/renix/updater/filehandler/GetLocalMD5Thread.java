@@ -20,6 +20,12 @@ import org.renix.updater.util.ConfigUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * @ClassName: GetLocalMD5Thread
+ * @Description: 获取本地指定文件夹MD5线程
+ * @author renzx
+ * @date 2016年10月10日
+ */
 public class GetLocalMD5Thread implements Runnable {
 
     private Logger LOGGER = LoggerFactory.getLogger(GetLocalMD5Thread.class);
@@ -47,6 +53,11 @@ public class GetLocalMD5Thread implements Runnable {
     public void run() {
         UpdaterMain.watcher.updateStepProgress(1);
         File f = new File(ConfigUtil.appHome);
+        try {
+            FileUtils.forceMkdir(f);
+        } catch (IOException e) {
+            LOGGER.warn("无法创建指定目录:" + f, e);
+        }
         Cache cache = Cache.getInstance();
         Map<String, Long> localFileSizeMap = cache.getLocalFileSizeMap();
         Map<String, String> localFileMD5Map = cache.getLocalFileMD5Map();

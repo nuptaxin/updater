@@ -9,6 +9,12 @@ import org.renix.updater.UpdaterMain;
 import org.renix.updater.util.Cache;
 import org.renix.updater.util.ConfigUtil;
 
+/**
+ * @ClassName: FileUpdateThread
+ * @Description: 文件更新线程
+ * @author renzx
+ * @date 2016年10月10日
+ */
 public class FileUpdateThread implements Runnable {
 
     @Override
@@ -58,6 +64,6 @@ public class FileUpdateThread implements Runnable {
             e.printStackTrace();
         }
         UpdaterMain.watcher.updateProgressBar(1f);
-        
+
     }
 }

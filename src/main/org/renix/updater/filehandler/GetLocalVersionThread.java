@@ -13,6 +13,12 @@ import org.renix.updater.bean.Version;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * @ClassName: GetLocalVersionThread
+ * @Description: 获取本地版本信息线程
+ * @author renzx
+ * @date 2016年10月10日
+ */
 public class GetLocalVersionThread implements Runnable {
 
     private static Logger LOGGER = LoggerFactory.getLogger(GetLocalVersionThread.class);
@@ -22,10 +28,10 @@ public class GetLocalVersionThread implements Runnable {
         if ("version".equals(node.getName())) {
             v.setTag(node.elementText("tag"));
             v.setDesp(node.elementText("description"));
-            if(node.elementText("skip")!=null){
+            if (node.elementText("skip") != null) {
                 skipRelease = Integer.valueOf(node.elementText("skip"));
             }
-            
+
         }
         return skipRelease;
     }
@@ -39,7 +45,7 @@ public class GetLocalVersionThread implements Runnable {
         if (versionFile.exists()) {
             Version v = UpdaterMain.localVersion;
             if (v == null) {
-                v= new Version();
+                v = new Version();
                 // 创建SAXReader对象
                 SAXReader reader = new SAXReader();
                 // 读取文件 转换成Document
@@ -69,23 +75,23 @@ public class GetLocalVersionThread implements Runnable {
         File versionFile = FileUtils.getFile(versionParent, "version.xml");
         // 如果存在本地版本信息，那么同步解析本地版本信息并加载到内存。
         if (versionFile.exists()) {
-                // 创建SAXReader对象
-                SAXReader reader = new SAXReader();
-                // 读取文件 转换成Document
-                Document document = null;
-                try {
-                    document = reader.read(versionFile);
-                } catch (DocumentException e) {
-                    LOGGER.error("无法读取本地版本信息文件", e);
-                }
-                // 获取根节点元素对象
-                Element root = document.getRootElement();
-                Version v =  new Version();
-                GetLocalVersionThread m = new GetLocalVersionThread();
-                int skip = m.parseLocalVersionFile(root, v);
-                System.out.println(v.getTag());
-                System.out.println(v.getDesp());
-                System.out.println(skip);
+            // 创建SAXReader对象
+            SAXReader reader = new SAXReader();
+            // 读取文件 转换成Document
+            Document document = null;
+            try {
+                document = reader.read(versionFile);
+            } catch (DocumentException e) {
+                LOGGER.error("无法读取本地版本信息文件", e);
+            }
+            // 获取根节点元素对象
+            Element root = document.getRootElement();
+            Version v = new Version();
+            GetLocalVersionThread m = new GetLocalVersionThread();
+            int skip = m.parseLocalVersionFile(root, v);
+            System.out.println(v.getTag());
+            System.out.println(v.getDesp());
+            System.out.println(skip);
 
         }
     }

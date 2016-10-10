@@ -16,6 +16,12 @@ import org.renix.updater.util.Cache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * @ClassName: GetRemoteMD5Thread
+ * @Description: 获取远程MD5信息线程
+ * @author renzx
+ * @date 2016年10月10日
+ */
 public class GetRemoteMD5Thread implements Runnable {
 
     private static Logger LOGGER = LoggerFactory.getLogger(GetRemoteMD5Thread.class);
@@ -50,7 +56,7 @@ public class GetRemoteMD5Thread implements Runnable {
         try {
             url = new URL(xmlMD5Url);
         } catch (MalformedURLException e) {
-            LOGGER.error("无法获取版本详情信息文件"+xmlMD5Url, e);
+            LOGGER.error("无法获取版本详情信息文件" + xmlMD5Url, e);
             return;
         }
 
@@ -81,7 +87,7 @@ public class GetRemoteMD5Thread implements Runnable {
         UpdaterMain.watcher.updateStepProgress(0);
         String baseUrl = UpdaterMain.up.getUrl();
         String xmlMD5Url = baseUrl + "/" + UpdaterMain.up.getVersion().getTag() + "/md5.xml";
-        System.out.println("xmlMD5Url"+xmlMD5Url);
+        System.out.println("xmlMD5Url" + xmlMD5Url);
         Cache cache = Cache.getInstance();
         Map<String, Long> fileSizeMap = cache.getFileSizeMap();
         Map<String, String> fileMD5Map = cache.getFileMD5Map();
@@ -112,7 +118,7 @@ public class GetRemoteMD5Thread implements Runnable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
+
         UpdaterMain.watcher.updateProgressBar(1f);
 
     }

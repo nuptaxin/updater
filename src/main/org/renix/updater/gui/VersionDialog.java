@@ -2,57 +2,32 @@ package org.renix.updater.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.Vector;
 
-import org.joda.time.base.BaseSingleFieldPeriod;
 import org.renix.updater.UpdaterMain;
 import org.renix.updater.bean.Version;
 
 import com.alee.laf.button.WebButton;
 import com.alee.laf.combobox.WebComboBox;
 import com.alee.laf.label.WebLabel;
-import com.alee.laf.list.WebList;
 import com.alee.laf.panel.WebPanel;
 import com.alee.laf.rootpane.WebDialog;
 
 
 
 /**
- * 版本选择对话框
+ * @ClassName: VersionDialog
+ * @Description: 版本选择对话框
  * @author renzx
+ * @date 2016年10月10日
  */
 class VersionDialog extends WebDialog {
-    
+
     private static Map<String, Version> versionMap = UpdaterMain.up.getVersionMap();
     private String selectedRelease = null;
     private String baseRelease = null;
-//    static{
-//        Version v = new Version();
-//        v.setRelease(0);
-//        v.setTag("0.0.0.1");
-//        v.setDesp("init");
-//        versionMap.put(v.getTag(), v);
-//        Version v1 = new Version();
-//        v1.setRelease(0);
-//        v1.setTag("0.0.0.2");
-//        v1.setDesp("init2");
-//        versionMap.put(v1.getTag(), v1);
-//        Version v2 = new Version();
-//        v2.setRelease(0);
-//        v2.setTag("0.0.0.3");
-//        v2.setDesp("init3");
-//        versionMap.put(v2.getTag(), v2);
-//    }
-    
-
-    
     /**
      * serialVersionUID
      */
@@ -69,12 +44,12 @@ class VersionDialog extends WebDialog {
      * 标题label
      */
     private WebLabel titleLabel;
-    
+
     private WebLabel contentLabel;
     private WebComboBox versionBox;
-    
+
     private WebPanel pageEndPanel;
-    
+
     private WebPanel parentPanel;
     private WebPanel centerPanel;
     private WebPanel centerSouthPanel;
@@ -100,14 +75,15 @@ class VersionDialog extends WebDialog {
         centerSouthPanel = new WebPanel();
         centerNorthPanel = new WebPanel();
         contentLabel = new WebLabel();
-        //将结果排序，默认使用release从小到大排序
-        Map<Integer,String> sortMap = new TreeMap<Integer,String>(new Comparator<Integer>() {
+        // 将结果排序，默认使用release从小到大排序
+        Map<Integer, String> sortMap = new TreeMap<Integer, String>(new Comparator<Integer>() {
 
             @Override
             public int compare(Integer o1, Integer o2) {
                 // TODO Auto-generated method stub
-                return o1-o2;
-            }});
+                return o1 - o2;
+            }
+        });
         for (String tag : versionMap.keySet()) {
             sortMap.put(versionMap.get(tag).getRelease(), tag);
         }
@@ -115,15 +91,15 @@ class VersionDialog extends WebDialog {
         selectedRelease = versionBox.getSelectedItem().toString();
         baseRelease = versionBox.getSelectedItem().toString();
         versionBox.addActionListener(new ActionListener() {
-            
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 selectedRelease = versionBox.getSelectedItem().toString();
             }
         });
 
-        setAlwaysOnTop(true);//是否置于顶层
-        setUndecorated(true);//是否隐藏窗口边框
+        setAlwaysOnTop(true);// 是否置于顶层
+        setUndecorated(true);// 是否隐藏窗口边框
 
         parentPanel.setBorder(javax.swing.BorderFactory.createCompoundBorder(
                 javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED),
@@ -131,7 +107,8 @@ class VersionDialog extends WebDialog {
         parentPanel.setLayout(new java.awt.BorderLayout());
 
         titleLabel.setFont(titleLabel.getFont().deriveFont(
-                titleLabel.getFont().getStyle() | java.awt.Font.BOLD, titleLabel.getFont().getSize() + 2));
+                titleLabel.getFont().getStyle() | java.awt.Font.BOLD,
+                titleLabel.getFont().getSize() + 2));
         titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titleLabel.setText("版本选择器");
         parentPanel.add(titleLabel, java.awt.BorderLayout.PAGE_START);
@@ -165,7 +142,8 @@ class VersionDialog extends WebDialog {
         centerPanel.add(centerSouthPanel, java.awt.BorderLayout.NORTH);
         centerPanel.add(versionBox, java.awt.BorderLayout.SOUTH);
 
-        centerNorthPanel.setLayout(new javax.swing.BoxLayout(centerNorthPanel, javax.swing.BoxLayout.Y_AXIS));
+        centerNorthPanel.setLayout(new javax.swing.BoxLayout(centerNorthPanel,
+                javax.swing.BoxLayout.Y_AXIS));
 
         contentLabel.setText("系统无法识别当前程序版本，请选择:");
         centerNorthPanel.add(contentLabel);
@@ -183,19 +161,20 @@ class VersionDialog extends WebDialog {
     private void confirmBtnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_CloseBActionPerformed
         UpdaterMain.watcher.WriteLocalVersion(versionMap.get(selectedRelease));
         setVisible(false);
-        
+
     }// GEN-LAST:event_CloseBActionPerformed
+
     private void autoBtnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_CloseBActionPerformed
         UpdaterMain.watcher.WriteLocalVersion(versionMap.get(baseRelease));
         setVisible(false);
     }// GEN-LAST:event_CloseBActionPerformed
      // Variables declaration - do not modify//GEN-BEGIN:variables
 
-    
+
 
     // End of variables declaration//GEN-END:variables
 
     public static void main(String[] args) {
-         new VersionDialog(UpdaterFrame.getInstance()).setVisible(true);
+        new VersionDialog(UpdaterFrame.getInstance()).setVisible(true);
     }
 }

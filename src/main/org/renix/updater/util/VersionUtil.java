@@ -3,7 +3,6 @@ package org.renix.updater.util;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.StringWriter;
 import java.io.Writer;
 
 import org.apache.commons.io.FileUtils;
@@ -16,10 +15,11 @@ import org.joda.time.DateTime;
 import org.renix.updater.bean.Version;
 
 /**
- * 获取本地程序版本号。 如果在当前用户目录下有记录，以当前用户记录为准。 如果当前用户目录下无记录，拿到当前{home}目录下的jar包进行记录。
- * 如果拿不到该记录，那么生成一次MD5值并与远程服务器进行对比。
- * 
+ * @ClassName: VersionUtil
+ * @Description: 版本信息工具类 获取本地程序版本号。 如果在当前用户目录下有记录，以当前用户记录为准。 如果当前用户目录下无记录，拿到当前{home}目录下的jar包进行记录。
+ *               如果拿不到该记录，那么生成一次MD5值并与远程服务器进行对比。
  * @author renzx
+ * @date 2016年10月10日
  */
 public class VersionUtil {
     public static Version getVersionByXML() {
@@ -82,9 +82,9 @@ public class VersionUtil {
         paramDesp.addText(v.getDesp());
         Element paramDt = root.addElement("updateTime");
         paramDt.addText(new DateTime(v.getUpdateTime()).toString("yyyy-MM-dd'T'HH:mm:ss"));
-        
-     // 创建字符串缓冲区
-        StringWriter stringWriter = new StringWriter();
+
+        // 创建字符串缓冲区
+        // StringWriter stringWriter = new StringWriter();
         // 设置文件编码
         OutputFormat xmlFormat = new OutputFormat();
         xmlFormat.setEncoding("UTF-8");

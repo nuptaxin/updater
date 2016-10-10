@@ -28,10 +28,12 @@ import com.alee.laf.panel.WebPanel;
 import com.alee.laf.progressbar.WebProgressBar;
 import com.alee.laf.rootpane.WebFrame;
 
+
 /**
- * 更新器主界面
- * 
+ * @ClassName: UpdaterFrame
+ * @Description: 更新器主界面
  * @author renzx
+ * @date 2016年10月10日
  */
 public class UpdaterFrame extends WebFrame {
 
@@ -186,7 +188,7 @@ public class UpdaterFrame extends WebFrame {
 
         InfoL.setText(("正在获取新版本详情……"));
         stepDetailP.add(InfoL, BorderLayout.CENTER);
-//        ProgressP.add(InfoL, BorderLayout.LINE_START);
+        // ProgressP.add(InfoL, BorderLayout.LINE_START);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -308,7 +310,7 @@ public class UpdaterFrame extends WebFrame {
     private void UpdateBActionPerformed(ActionEvent evt) {// GEN-FIRST:event_UpdateBActionPerformed
         DetailedP.setVisible(false);
         stepDetailP.setVisible(true);
-//        stepDetailP.setBackground(Color.red);
+        // stepDetailP.setBackground(Color.red);
         stepDetailP.setMargin(0, 0, 40, 0);
         CommandP.setVisible(false);
         ProgressP.setVisible(true);
@@ -403,7 +405,9 @@ public class UpdaterFrame extends WebFrame {
                 // 如果无法获取本地版本信息，弹出窗口由用户选择
                 if (UpdaterMain.localVersion == null) {
                     new VersionDialog(UpdaterFrame.getInstance()).setVisible(true);
-                    String versinfo1 = "最新版本：" + UpdaterMain.up.getVersion().getTag() + "  当前版本：" + UpdaterMain.localVersion.getTag();
+                    String versinfo1 =
+                            "最新版本：" + UpdaterMain.up.getVersion().getTag() + "  当前版本："
+                                    + UpdaterMain.localVersion.getTag();
                     gui.VersInfoL.setText(versinfo1);
                 }
 

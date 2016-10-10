@@ -1,10 +1,9 @@
 package org.renix.updater.filehandler;
 
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.StringWriter;
-import java.io.Writer;
+import java.io.UnsupportedEncodingException;
 
 import org.apache.commons.io.FileUtils;
 import org.dom4j.Document;
@@ -17,9 +16,15 @@ import org.renix.updater.bean.Version;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * @ClassName: WriteLocalVersion2File
+ * @Description: 写版本信息到文件线程
+ * @author renzx
+ * @date 2016年10月10日
+ */
 public class WriteLocalVersion2File {
 
-    private static Logger LOGGER = LoggerFactory.getLogger(WriteLocalVersion2File.class);
+    static Logger LOGGER = LoggerFactory.getLogger(WriteLocalVersion2File.class);
 
 
     public static void write(Version v, Integer release) {
@@ -33,17 +38,23 @@ public class WriteLocalVersion2File {
             e1.printStackTrace();
         }
         File versionFile = FileUtils.getFile(versionParent, "version.xml");
-        Writer fileWriter = null;
+        FileOutputStream fileWriter = null;
         try {
-            fileWriter = new FileWriter(versionFile, false);
+            fileWriter = new FileOutputStream(versionFile, false);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        write2File(fileWriter, v,release);
+        try {
+            write2File(fileWriter, v, release);
+        } catch (UnsupportedEncodingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
 
-    private static void write2File(Writer fileWriter, Version v, Integer release) {
+    private static void write2File(FileOutputStream fileWriter, Version v, Integer release)
+            throws UnsupportedEncodingException {
         Document document = DocumentHelper.createDocument();
 
         // 创建root
@@ -55,7 +66,7 @@ public class WriteLocalVersion2File {
         Element paramDesp = root.addElement("description");
         paramDesp.addText(v.getDesp());
         Element paramSkip = root.addElement("skip");
-        paramSkip.addText(release+"");
+        paramSkip.addText(release + "");
 
         // 为节点添加属性
         // param.addAttribute("key", "sys.username");
@@ -64,7 +75,7 @@ public class WriteLocalVersion2File {
         // param.addText("中国");
 
         // 创建字符串缓冲区
-        StringWriter stringWriter = new StringWriter();
+        // StringWriter stringWriter = new StringWriter();
         // 设置文件编码
         OutputFormat xmlFormat = new OutputFormat();
         xmlFormat.setEncoding("UTF-8");

@@ -3,7 +3,6 @@ package org.renix.updater.filehandler;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.StringWriter;
 import java.io.Writer;
 
 import org.apache.commons.codec.digest.DigestUtils;
@@ -16,6 +15,12 @@ import org.dom4j.io.XMLWriter;
 import org.joda.time.DateTime;
 import org.renix.updater.util.ConfigUtil;
 
+/**
+ * @ClassName: CreateVersionMD5
+ * @Description: 创建本地文件的MD5值信息
+ * @author renzx
+ * @date 2016年10月10日
+ */
 public class CreateVersionMD5 {
     public static void main(String[] args) throws IOException {
         ConfigUtil.appHome = "E:\\dist1";
@@ -29,13 +34,14 @@ public class CreateVersionMD5 {
             e.printStackTrace();
         }
         try {
-            makeXmlFile(fileWriter, f,f1);
+            makeXmlFile(fileWriter, f, f1);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    public static void getMd5File(){
+
+    public static void getMd5File() {
         File f = FileUtils.getFile(ConfigUtil.appHome);
         File f1 = FileUtils.getFile(ConfigUtil.md5Dest);
         Writer fileWriter = null;
@@ -45,7 +51,7 @@ public class CreateVersionMD5 {
             e.printStackTrace();
         }
         try {
-            makeXmlFile(fileWriter, f,f1);
+            makeXmlFile(fileWriter, f, f1);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -59,9 +65,9 @@ public class CreateVersionMD5 {
         Element root = document.addElement("dirmd5");
         root.addAttribute("datetime", DateTime.now().toString("yyyy-MM-dd'T'HH:mm:ss"));
 
-        File[] c =f.listFiles();
+        File[] c = f.listFiles();
         for (File file : c) {
-            if (file.equals(f)||file.equals(f1))
+            if (file.equals(f) || file.equals(f1))
                 continue;
             if (file.isFile()) {
                 // 生成root的一个接点
@@ -86,7 +92,7 @@ public class CreateVersionMD5 {
         // param.addText("中国");
 
         // 创建字符串缓冲区
-        StringWriter stringWriter = new StringWriter();
+        // StringWriter stringWriter = new StringWriter();
         // 设置文件编码
         OutputFormat xmlFormat = new OutputFormat();
         xmlFormat.setEncoding("UTF-8");

@@ -4,7 +4,7 @@
 
     <groupId>org.renix.updater</groupId>
     <artifactId>updater-java</artifactId>
-    <version>1.0.0.2</version>
+    <version>1.0.0.4</version>
     <packaging>jar</packaging>
 
     <name>updater-java</name>
@@ -63,10 +63,16 @@
             <artifactId>commons-cli</artifactId>
             <version>1.2</version>
         </dependency>
-        <dependency>
+        <!-- <dependency>
             <groupId>net.java.dev.jna</groupId>
             <artifactId>jna-platform</artifactId>
             <version>4.2.2</version>
+        </dependency> -->
+        <dependency>
+            <groupId>org.aeonbits.owner</groupId>
+            <artifactId>owner</artifactId>
+            <version>1.0.9</version>
+            <type>jar</type>
         </dependency>
     </dependencies>
     <properties>
@@ -87,6 +93,12 @@
                 <directory>src/main</directory>
                 <includes>
                     <include>**/*.png</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>conf</directory>
+                <includes>
+                    <include>*.*</include>
                 </includes>
             </resource>
         </resources>

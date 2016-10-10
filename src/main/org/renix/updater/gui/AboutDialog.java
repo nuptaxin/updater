@@ -5,11 +5,11 @@ import com.alee.laf.label.WebLabel;
 import com.alee.laf.panel.WebPanel;
 import com.alee.laf.rootpane.WebDialog;
 
-
-
 /**
- * 更新器信息对话框
+ * @ClassName: AboutDialog
+ * @Description: 更新器信息对话框
  * @author renzx
+ * @date 2016年10月10日
  */
 class AboutDialog extends WebDialog {
 
@@ -17,7 +17,7 @@ class AboutDialog extends WebDialog {
      * serialVersionUID
      */
     private static final long serialVersionUID = 8107917872560814237L;
-    
+
     private WebButton closeBtn;
     private WebLabel updaterTag;
     private WebLabel aboutLabel;
@@ -55,8 +55,8 @@ class AboutDialog extends WebDialog {
         contentLabel2 = new WebLabel();
         contentLabel3 = new WebLabel();
 
-        setAlwaysOnTop(true);//是否置于顶层
-        setUndecorated(true);//是否隐藏窗口边框
+        setAlwaysOnTop(true);// 是否置于顶层
+        setUndecorated(true);// 是否隐藏窗口边框
 
         parentPanel.setBorder(javax.swing.BorderFactory.createCompoundBorder(
                 javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED),
@@ -64,7 +64,8 @@ class AboutDialog extends WebDialog {
         parentPanel.setLayout(new java.awt.BorderLayout());
 
         aboutLabel.setFont(aboutLabel.getFont().deriveFont(
-                aboutLabel.getFont().getStyle() | java.awt.Font.BOLD, aboutLabel.getFont().getSize() + 2));
+                aboutLabel.getFont().getStyle() | java.awt.Font.BOLD,
+                aboutLabel.getFont().getSize() + 2));
         aboutLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         aboutLabel.setText("关于更新器");
         parentPanel.add(aboutLabel, java.awt.BorderLayout.PAGE_START);
@@ -95,7 +96,8 @@ class AboutDialog extends WebDialog {
 
         centerPanel.add(centerSouthPanel, java.awt.BorderLayout.SOUTH);
 
-        centerNorthPanel.setLayout(new javax.swing.BoxLayout(centerNorthPanel, javax.swing.BoxLayout.Y_AXIS));
+        centerNorthPanel.setLayout(new javax.swing.BoxLayout(centerNorthPanel,
+                javax.swing.BoxLayout.Y_AXIS));
 
         contentLabel1.setText(("Java更新器是基于JDK6+可自动更新应用程序的升级软件"));
         centerNorthPanel.add(contentLabel1);
@@ -120,11 +122,11 @@ class AboutDialog extends WebDialog {
     }// GEN-LAST:event_CloseBActionPerformed
      // Variables declaration - do not modify//GEN-BEGIN:variables
 
-    
+
 
     // End of variables declaration//GEN-END:variables
 
     public static void main(String[] args) {
-         new AboutDialog(UpdaterFrame.getInstance()).setVisible(true);
+        new AboutDialog(UpdaterFrame.getInstance()).setVisible(true);
     }
 }
